@@ -1,12 +1,15 @@
 const WebSocket = require('ws')
 const readline = require('readline')
 var url = 'ws://echo.websocket.org'
-var socket = new WebSocket(url)
+var internal = 'ws://localhost:8080'
+var socket = new WebSocket(internal)
+var error = null
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
+
 
 socket.onopen = function (event) {
   console.log('WEBSOCKET CONNECT')
@@ -14,8 +17,10 @@ socket.onopen = function (event) {
     socket.send(input)
   })
 }
+
 socket.onclose = function (event) {
-  console.log('CONNECTION CLOSE , thanks for connect')
+  console.log('CONNECTION CLOSED , thanks for connect')
+  rl.close()
 }
 
 socket.onmessage = function (event) {
@@ -24,10 +29,12 @@ socket.onmessage = function (event) {
     rl.close()
   }
   else {
-    console.log('Received: ' + event.data)
+    console.log('Server : ' + event.data)
   }
 }
 
 socket.onerror = function (event) {
-  console.log('ERROR : ' + event)
+  error = `${event.type}: ${event.syscall} ${event.code} ${event.address}:${event.port}`
+  console.log(error)
+  rl.close()
 }
