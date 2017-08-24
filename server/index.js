@@ -8,36 +8,6 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
-/*
-socket.on('connection', function connection(ws, req) {
-
-  console.log(req.connection)
-
-  console.log('OPEN CONNECTION')
-  ws.send('SERVER CONNECTED')
-  
-  rl.on('line', (input) => {
-    ws.send(input)
-  })
-  ws.onmessage = function (e) {
-    if(e.data === 'close') {
-      socket.close()
-      rl.close()
-    }
-    console.log(`Client : ${e.data}`)
-  }
-  ws.onclose = function (event) {
-    console.log('CLIENT LEFT')
-    rl.close()
-  }
-  ws.onerror = function (event) {
-    error = `${event.type}: ${event.syscall} ${event.code} ${event.address}:${event.port}`
-    console.log(error)
-    rl.close()
-  }
-
-})*/
-
 
 console.log('START SERVER')
 
