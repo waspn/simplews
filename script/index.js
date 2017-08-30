@@ -1,7 +1,7 @@
 var WebSocket = require('ws')
 var readline = require('readline')
 const url = 'ws://echo.websocket.org'
-const internal = 'ws://localhost:8ß080'
+const internal = 'ws://localhost:8080'
 var socket = new WebSocket(internal)
 var error = null
 
